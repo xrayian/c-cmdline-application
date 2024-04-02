@@ -47,7 +47,7 @@ void decryptCharacter(char *letter, int key_source)
     *letter = ((*letter) - key) % 255;
 }
 
-void decryptHashStdIn(char *message[], int len, int key)
+void decryptHashStdIn(char *message[], int len, int key) //! buggy
 {
     // printf("Decoded Message: ");
     for (int i = 2; i <= len; i++) // avoiding the 0th argv
@@ -59,7 +59,7 @@ void decryptHashStdIn(char *message[], int len, int key)
             decryptCharacter(&letter, key);
             printf("%c", letter);
         }
-        printf(" ");
+        printf(" "); //parse space as well
     }
     printf("\n");
 }

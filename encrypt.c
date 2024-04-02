@@ -60,7 +60,7 @@ void encryptHash(char message[1000], int key)
     printf("\n");
 }
 
-void encryptHashStdIn(char *message[], int len, int key)
+void encryptHashStdIn(char *message[], int len, int key) //! might be buggy
 {
     // printf("Encrypted Message: ");
     for (int i = 2; i <= len; i++) // avoiding the 0th argv
