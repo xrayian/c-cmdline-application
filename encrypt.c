@@ -43,21 +43,8 @@ int main(int argc, char *argv[]) //[0]
 
 void encryptCharacter(char *letter, int key_source)
 {
-    int key = key_source * 1;
-    if (*letter >= 'a' && *letter <= 'z')
-    {
-        if ((*letter + key) > 'z')
-            *letter = (*letter + key) - 26;
-        else
-            *letter += key;
-    }
-    else if (*letter >= 'A' && *letter <= 'Z')
-    {
-        if ((*letter + key) > 'Z')
-            *letter = (*letter + key) - 26;
-        else
-            *letter += key;
-    }
+    int key = ((key_source) * 1024) % 127;
+    *letter = ((*letter) + key) % 255;
 }
 
 void encryptHash(char message[1000], int key)
@@ -75,7 +62,7 @@ void encryptHash(char message[1000], int key)
 
 void encryptHashStdIn(char *message[], int len, int key)
 {
-    printf("Encrypted Message: ");
+    // printf("Encrypted Message: ");
     for (int i = 2; i <= len; i++) // avoiding the 0th argv
     {
         int n = strlen(message[i]);

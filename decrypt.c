@@ -43,26 +43,13 @@ int main(int argc, char *argv[]) //[0]
 
 void decryptCharacter(char *letter, int key_source)
 {
-    int key = key_source * 1;
-    if (*letter >= 'a' && *letter <= 'z')
-    {
-        if ((*letter - key) < 'a')
-            *letter = (*letter - key) + 26;
-        else
-            *letter -= key;
-    }
-    else if (*letter >= 'A' && *letter <= 'Z')
-    {
-        if ((*letter - key) < 'A')
-            *letter = (*letter - key) + 26;
-        else
-            *letter -= key;
-    }
+    int key = ((key_source) * 1024) % 127;
+    *letter = ((*letter) - key) % 255;
 }
 
 void decryptHashStdIn(char *message[], int len, int key)
 {
-    printf("Decoded Message: ");
+    // printf("Decoded Message: ");
     for (int i = 2; i <= len; i++) // avoiding the 0th argv
     {
         int n = strlen(message[i]);
@@ -82,7 +69,7 @@ void decryptHash(char message[1000], int key)
     printf("Decoded Message: ");
 
     int n = strlen(message);
-    for (int j = 0; j < n; j++)
+    for (int j = 0; j < n-1; j++)
     {
         char letter = message[j];
         decryptCharacter(&letter, key);
