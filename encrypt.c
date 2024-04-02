@@ -60,10 +60,9 @@ void encryptHash(char message[1000], int key)
     printf("\n");
 }
 
-void encryptHashStdIn(char *message[], int len, int key) //! might be buggy
+void encryptHashStdIn(char *message[], int len, int key)
 {
-    // printf("Encrypted Message: ");
-    for (int i = 2; i <= len; i++) // avoiding the 0th argv
+    for (int i = 2; i <= len; i++)
     {
         int n = strlen(message[i]);
         for (int j = 0; j < n; j++)
@@ -72,7 +71,9 @@ void encryptHashStdIn(char *message[], int len, int key) //! might be buggy
             encryptCharacter(&letter, key);
             printf("%c", letter);
         }
-        printf(" ");
+        char space = ' ';
+        encryptCharacter(&space, key);
+        printf("%c", space);
     }
     printf("\n");
 }
