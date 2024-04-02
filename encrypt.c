@@ -43,15 +43,25 @@ int main(int argc, char *argv[]) //[0]
 
 void encryptCharacter(char *letter, int key_source)
 {
-    int key = ((key_source) * 1024) % 127;
-    *letter = ((*letter) + key) % 255;
+    int key = ((key_source) * 1024) % 255;
+    int hashedValue = ((*letter) + key) % 255;
+    // printf("%c %i", hashedValue, hashedValue);
+    if ((hashedValue >= 0 && 32 >= hashedValue) || hashedValue == 127)
+    {
+        *letter = hashedValue + 32;
+    }
+    else
+    {
+
+        *letter = hashedValue;
+    }
 }
 
 void encryptHash(char message[1000], int key)
 {
     printf("Encrypted Message: ");
     int n = strlen(message);
-    for (int j = 0; j < n; j++)
+    for (int j = 0; j < n - 1; j++)
     {
         char letter = message[j];
         encryptCharacter(&letter, key);
